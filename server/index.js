@@ -29,7 +29,7 @@ app.use(express.json());
 
 app.use(
      cors({
-		origin:"https://studynotion-two.vercel.app/",
+		origin:"https://studynotion-mxaz9l6tj-shubhams-projects-e5abed7e.vercel.app",
 		credentials:true,
 	}) 
 );
