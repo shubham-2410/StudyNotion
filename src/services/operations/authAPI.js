@@ -37,7 +37,7 @@ export function login(email, password, navigate) {
 		}
 		catch (error) {
 			console.log("Login error ", error);
-			toast.error("Login Failed");
+			toast.error(error.response.data.message);
 		}
 
 		dispatch(profileLoading(false));
