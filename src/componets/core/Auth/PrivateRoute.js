@@ -10,7 +10,6 @@ const PrivateRoute = ({children}) => {
         return children
     }
     else{
-        console.log("this is culprit")
         return <Navigate to='/login'/>
     }
 }

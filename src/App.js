@@ -12,6 +12,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivateRoute from "./componets/core/Auth/PrivateRoute";
 import MyProfile from "./componets/core/Dashboard.js/MyProfile";
+import EnrolledCourses from "./componets/core/Dashboard.js/EnrolledCourses";
+import PurchaseHistory from "./componets/core/Dashboard.js/PurchaseHistory";
+import Settings from "./componets/core/Dashboard.js/Settings";
 import Error from './pages/Error';
 
 function App() {
@@ -37,6 +40,9 @@ function App() {
           }
         >
           <Route path="/dashboard/my-profile" element={<MyProfile/>}></Route>
+          <Route path="/dashboard/settings" element={<Settings/>}></Route>
+          <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}></Route>
+          <Route path="/dashboard/purchase-history" element={<PurchaseHistory/>}></Route>
 
         </Route>
 

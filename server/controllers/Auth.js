@@ -164,9 +164,9 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-
+        console.log(1)
         if (!email || !password) {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "Please enter all details"
             })
@@ -178,7 +178,7 @@ const login = async (req, res) => {
                             .populate("profile");
         console.log("existinguser"  , existingUser);
         if (!existingUser) {
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "Please signup first",
             })
@@ -218,7 +218,7 @@ const login = async (req, res) => {
         }
         else {
             console.log("success");
-            return res.status(400).json({
+            return res.status(404).json({
                 success: false,
                 message: "Incorrect Password"
             })

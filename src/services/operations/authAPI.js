@@ -22,6 +22,9 @@ export function login(email, password, navigate) {
 		try {
 			console.log("Inside login connector")
 			const response = await apiConnector("POST", LOGIN_API, { email, password });
+
+			console.log("After api connector" , response)
+
 			if (!response.data.success) {
 				throw new Error(response.data);
 			}
@@ -37,7 +40,7 @@ export function login(email, password, navigate) {
 		}
 		catch (error) {
 			console.log("Login error ", error);
-			toast.error("Login Failed");
+			toast.error(error.response.data.message);
 		}
 
 		dispatch(profileLoading(false));
