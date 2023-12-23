@@ -20,7 +20,7 @@ const Settings = () => {
 
         <ProfilePhoto image={user.image} />
         <ProfileInfo user={user} />
-        <ProfilePassword />
+        <ProfilePassword email={user.email}/>
         <AccountDelete />
       </div>
 

@@ -6,6 +6,7 @@ const auth = async (req, res, next) => {
         console.log("Inside auth middleware");
         const token = req.body.token || req.cookies.token || (req.headers.authorization ? req.headers.authorization.replace("Bearer ", "") : null);
 
+        console.log( "Cookie" ,req.cookies.token)
         if (!token) {
             return res.status(401).json({
                 success: false,

@@ -203,6 +203,8 @@ const login = async (req, res) => {
             const options = {
                 expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // Expires in 3 days
                 httpOnly: true,
+                samesite:'None',
+                // secure : true,
             };
             console.log("before")
             // console.log("Exi..." , existingUser)
@@ -236,9 +238,9 @@ const login = async (req, res) => {
 
 const changePassword =async (req , res)=>{
     try {
-        const {email , newPassword , confirmPassword , oldPassword} = req.body;
-
-        if(!newPassword || !oldPassword ||!confirmPassword || !email){
+        const {email , newPassword , oldPassword} = req.body;
+        console.log("password change : " , email , newPassword , oldPassword);
+        if(!newPassword || !oldPassword || !email){
             res.status(409).json({
                 success:false,
                 message:"Please fill all details"
@@ -248,19 +250,23 @@ const changePassword =async (req , res)=>{
         const user = await User.findOne({email:email});
 
         if(await bcrypt.compare(oldPassword , user.password)){
+            console.log("Pass match")
+
+            const hashPassword=await bcrypt.hash(newPassword , 10);
             await User.findOneAndUpdate(
                 {email:email},
-                {password:newPassword},
+                {password:hashPassword},
             )
 
             mailSender(email , "Password Changing" , `Password Changed Successfully at ${Date.now()} `)
+            console.log("Mail send successfully")
             return res.status(200).json({
                 success:true,
                 message:"Password Changed Successfully"
             })
         }
         else{
-            return res.status(201).json({
+            return res.status(404).json({
                 success:false,
                 message:"Old Password is Incorrect"
             })

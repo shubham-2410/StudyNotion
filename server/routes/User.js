@@ -12,7 +12,7 @@ const {resetPasswordToken,resetPassword} = require("../controllers/ResetPassword
 userRoutes.post("/login" , login);
 userRoutes.post("/signup" , signUp);
 userRoutes.post("/sentotp" , sentOTP);
-userRoutes.post("/changepassword" , auth ,changePassword);
+userRoutes.put("/changepassword" , auth ,changePassword);
 
 // reset password
 userRoutes.post('/reset-password-token' , resetPasswordToken );

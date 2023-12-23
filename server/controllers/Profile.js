@@ -6,21 +6,18 @@ const CourseProgress = require("../models/CourseProgress");
 
 const updateProfile = async (req, res) => {
     try {
-        const { gender, dateOfBirth = "", about = "", contactNumber } = req.body;
+        const { gender="", dateOfBirth, about = "", contactNumber="" } = req.body;
 
-        if (!gender || !contactNumber) {
-            return res.status(409).json({
-                success: false,
-                message: "Please fill required details",
-            })
-        }
+        console.log("inside update profile " ,gender , dateOfBirth , about , contactNumber);
+        // if (!gender || !contactNumber) {
+        //     return res.status(409).json({
+        //         success: false,
+        //         message: "Please fill required details",
+        //     })
+        // }
         const userId = req.user.id;
 
-        // problem while type casting
-        // console.log("userIdString:", userIdString , typeof(userIdString));
-        // const userId = mongoose.Types.ObjectId(userIdString);
-
-        const user = await User.findById({ _id: userId });
+        const user = await User.findById({ _id: userId }).populate("profile").exec();
         console.log("i am user ", user);
         if (!user) {
             return res.status(201).json({
@@ -28,7 +25,8 @@ const updateProfile = async (req, res) => {
                 message: "No user found",
             })
         }
-
+        
+        user.password = undefined;
         const updateAdditionalDetails = await Profile.findOneAndUpdate(
             { _id: user.profile },
             {
@@ -41,7 +39,6 @@ const updateProfile = async (req, res) => {
         );
 
         // Other way 
-
         // const updateAdditionalDetails = await Profile.findById({_id:user.profile});
         // updateAdditionalDetails.dateOfBirth = dateOfBirth;
         // updateAdditionalDetails.gender=gender;
@@ -49,10 +46,12 @@ const updateProfile = async (req, res) => {
         // updateAdditionalDetails.contactNumber=contactNumber;
         // await updateAdditionalDetails.save();
 
+        const newUser = await User.findById({ _id: userId }).populate("profile");
         res.status(200).json({
             success: true,
             message: "Profile Updated Successfully",
             updateAdditionalDetails,
+            newUser,
         })
 
     }
@@ -74,7 +73,7 @@ const deleteAccount = async (req, res) => {
         if (!userId) {
             return res.status(404).json({
                 success: false,
-                message: "userId not present for user",
+                message: "SignUp First",
             });
         }
 
@@ -95,7 +94,7 @@ const deleteAccount = async (req, res) => {
 
         return res.status(200).json({
             success: true,
-            message: "User Account deleted successfully along with profile",
+            message: "Account deleted successfully ",
         });
     }
     catch (error) {

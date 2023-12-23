@@ -9,10 +9,7 @@ const ProfilePhoto = ({image}) => {
             </div>
             <div className=' flex  flex-col gap-2'>
                 <p>Change Profile Picture</p>
-                <div className=' flex gap-3'>
-                    <Button active={false}>Select</Button>
-                    <Button active={true}>Upload</Button>
-                </div>
+                <Button linkto={"/"}>Upload</Button>
             </div>
         </div>
     )
