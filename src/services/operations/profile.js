@@ -9,6 +9,7 @@ const {
     UPDATE_PROFILE,
     DELETE_PROFILE,
     UPDATE_PASS,
+    GET_ENROLLED_COURSES_API,
 } = profileEndpoint;
 
 
@@ -84,6 +85,27 @@ export function deleteAccount( navigate) {
         }
         catch (error) {
             console.log("Account Deletion Error", error);
+            toast.error(error.response.data.message);
+        }
+        toast.dismiss(toastId);
+    }
+}
+
+export function getEnrolledCourses() {
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading");
+        try {
+            const response = await apiConnector("GET", GET_ENROLLED_COURSES_API);
+
+            console.log("After api connector", response)
+            
+            if (!response.data.success) {
+                throw new Error(response.data);
+            }
+            toast.success("Courses Details Fetched");
+        }
+        catch (error) {
+            console.log("Courses Details fetch Error", error);
             toast.error(error.response.data.message);
         }
         toast.dismiss(toastId);

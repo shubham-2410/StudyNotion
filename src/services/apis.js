@@ -19,4 +19,5 @@ export const profileEndpoint={
     UPDATE_PASS : BASE_URL + "/auth/changepassword",
     UPDATE_PROFILE : BASE_URL + "/profile/updateProfile",
     DELETE_PROFILE : BASE_URL + "/profile/deleteProfile",
+    GET_ENROLLED_COURSES_API : BASE_URL + "/profile/getEnrolledCourses"
 }

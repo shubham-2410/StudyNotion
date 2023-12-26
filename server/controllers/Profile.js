@@ -209,6 +209,28 @@ const getAlluserDetails = async (req, res) => {
 
 const getEnrolledCourses = async (req, res) => {
 
+    try {
+        const user = req.user.id;
+        const userDetails = User.findOne({_id: user.id}).populate("Course").exec();
+
+        if(!userDetails){
+            return res.status(400).json({
+                success:false,
+                message:"User Doesn't exist!!"
+            })
+        }
+
+        return res.status(200).json({
+            success:true,
+            data:userDetails.Course,
+        })
+    } 
+    catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
 }
 
 module.exports = {
