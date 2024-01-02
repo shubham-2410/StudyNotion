@@ -12,7 +12,7 @@ const RenderCard = () => {
     return (
         <div>
             {
-                cart.map((index, course) => {
+                cart.map((index, course) => (
                     <div key={index}>
                         <img src={course?.thumbnail} alt='thumbnail' />
 
@@ -44,7 +44,7 @@ const RenderCard = () => {
                             <span>{course?.price}</span>
                         </div>
                     </div>
-                })
+                ))
             }
         </div>
     )

@@ -27,7 +27,7 @@ const AccountDelete = () => {
                 <p className=' font-inter  text-richblack-100 font-semibold'>Would you like to delete account?</p>
                 <p className=' text-richblack-300 font-semibold w-[60%]'>This account may contains paid courses. Deleting your account is permanent and will all contain associated with it.</p>
 
-                <p className=' mt-3 italic text-red-600 opacity-70 font-semibold pb-1'><a onClick={()=>deleteHandle()} className=' cursor-pointer hover:text-lg  hover:pb-0  transition-all duration-200'>I want to delete my account.</a></p>
+                <p className=' mt-3 italic text-red-600 opacity-70 font-semibold pb-1'><span onClick={()=>deleteHandle()} className=' cursor-pointer hover:text-lg  hover:pb-0  transition-all duration-200'>I want to delete my account.</span></p>
             </div>
 
         </div>

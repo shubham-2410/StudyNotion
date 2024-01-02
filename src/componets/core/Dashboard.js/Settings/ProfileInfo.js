@@ -13,7 +13,7 @@ const ProfileInfo = ({ user }) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
   } = useForm();
 
   useEffect(() => {
