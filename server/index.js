@@ -29,7 +29,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: ["https://studynotion-backend-x6px.onrender.com" , "http://localhost:3000"],
         credentials: true,
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         allowedHeaders: "Content-Type,Authorization",
