@@ -97,7 +97,7 @@ const NavBar = () => {
 				<div className='flex gap-4 items-center '>
 					{
 						token && user?.accountType === 'Student' && (
-							<Link to={'/cart'} className='relative text-white  text-[30px]'>
+							<Link to={'/dashboard/cart'} className='relative text-white  text-[30px]'>
 								{/* cart */}
 								<AiOutlineShoppingCart />
 								{
