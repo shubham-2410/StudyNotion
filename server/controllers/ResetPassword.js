@@ -19,7 +19,7 @@ const resetPasswordToken = async (req , res)=>{
 
         const token = crypto.randomUUID();
         console.log("crypto token" , token);
-        const url=`http://localhost:3000/update-password/${token}`;
+        const url=`https://studynotion-two.vercel.app/update-password/${token}`;
 
         const updateUser = await User.findOneAndUpdate(
             {email:email},
