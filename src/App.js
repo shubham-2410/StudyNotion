@@ -17,9 +17,14 @@ import PurchaseHistory from "./componets/core/Dashboard.js/PurchaseHistory";
 import Settings from "./componets/core/Dashboard.js/Settings";
 import Error from './pages/Error';
 import Cart from "./componets/core/Dashboard.js/Cart";
+import MyCourses from "./componets/core/Dashboard.js/Instructor.js/MyCourses";
 
 function App() {
+
+  const user = JSON.parse(localStorage.getItem('user'));
   return (
+
+
     <div className="w-screen min-h-screen  bg-richblack-900 flex flex-col font-inter">
       <NavBar />
       <Routes>
@@ -40,15 +45,20 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="/dashboard/my-profile" element={<MyProfile/>}></Route>
-          <Route path="/dashboard/settings" element={<Settings/>}></Route>
-          <Route path="/dashboard/cart" element={<Cart/>}></Route>
-          <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses/>}></Route>
-          <Route path="/dashboard/purchase-history" element={<PurchaseHistory/>}></Route>
+          <Route path="/dashboard/my-profile" element={<MyProfile />}></Route>
+          <Route path="/dashboard/settings" element={<Settings />}></Route>
+          {/* cart is rendered as wishlist */}
+          <Route path="/dashboard/cart" element={<Cart />}></Route>
+          <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses />}></Route>
+          <Route path="/dashboard/purchase-history" element={<PurchaseHistory />}></Route>
+          {
+            user!==null && user?.accountType === 'Instructor' &&
+            <Route path="/dashboard/my-courses" element={<MyCourses />} />
+          }
 
         </Route>
 
-        <Route path="*" element={<Error/>}/>
+        <Route path="*" element={<Error />} />
 
 
 
