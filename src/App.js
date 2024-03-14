@@ -18,6 +18,7 @@ import Settings from "./componets/core/Dashboard.js/Settings";
 import Error from './pages/Error';
 import Cart from "./componets/core/Dashboard.js/Cart";
 import MyCourses from "./componets/core/Dashboard.js/Instructor.js/MyCourses";
+import AddCourse from "./componets/core/Dashboard.js/Instructor.js/AddCourse/AddCourse";
 
 function App() {
 
@@ -52,8 +53,11 @@ function App() {
           <Route path="/dashboard/enrolled-courses" element={<EnrolledCourses />}></Route>
           <Route path="/dashboard/purchase-history" element={<PurchaseHistory />}></Route>
           {
-            user!==null && user?.accountType === 'Instructor' &&
-            <Route path="/dashboard/my-courses" element={<MyCourses />} />
+            user !== null && user?.accountType === 'Instructor' &&
+            <>
+              <Route path="/dashboard/my-courses" element={<MyCourses />} />
+              <Route path="/dashboard/add-course" element={<AddCourse />} />
+            </>
           }
 
         </Route>

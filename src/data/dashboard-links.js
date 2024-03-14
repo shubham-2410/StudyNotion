@@ -29,10 +29,10 @@ export const sidebarLinks = [
   },
   {
     id: 5,
-    name: "Courses",
-    path: "/dashboard/my-courses",
+    name: "Add Course",
+    path: "/dashboard/add-course",
     type: "Instructor",
-    icon: "VscVm",
+    icon: "VscAdd",
   },
   {
     id: 6,
