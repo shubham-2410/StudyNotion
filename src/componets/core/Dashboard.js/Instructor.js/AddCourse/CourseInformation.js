@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { getAllCourses } from '../../../../../services/operations/courseAPI';
 import RequirementInput from './RequirementInput';
 import {setStep} from '../../../../../redux/slices/courseSlice'
+import TagsInput from './TagsInput';
 
 const CourseInformation = () => {
 
@@ -13,7 +14,7 @@ const CourseInformation = () => {
         handleSubmit,
         setValue,
         getValues,
-        formState: { errors, isSubmitSuccessful },
+        formState: { errors },
     } = useForm();
 
     const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const CourseInformation = () => {
     }, [dispatch, editCourse, setValue]);
 
     const onSubmit = async (data) => {
+        // e.preventDefault();
         console.log("form data is" , data);
     }
 
@@ -66,7 +68,7 @@ const CourseInformation = () => {
                         id='courseTitle'
                         placeholder='Enter course title'
                         {...register("courseTitle", { required: true })}
-                        className='w-full text-richblack-900'
+                        className='w-full text-richblack-400 bg-richblack-700 rounded-md text-lg'
                     />
                     {errors.courseTitle && (
                         <span>Course Title is Required **</span>
@@ -79,7 +81,7 @@ const CourseInformation = () => {
                         id='courseShortDesc'
                         placeholder='Enter Description'
                         {...register("courseShortDesc", { required: true })}
-                        className='w-full min-h-[140px] text-richblack-900'
+                        className='w-full min-h-[140px] text-richblack-400 bg-richblack-700 rounded-md text-lg'
                     />
                     {errors.courseShortDesc && (
                         <span>Course Description is Required **</span>
@@ -92,7 +94,7 @@ const CourseInformation = () => {
                         id='coursePrice'
                         placeholder='   Enter course price'
                         {...register("coursePrice", { required: true , valueAsNumber:true})}
-                        className='w-full text-richblack-900'
+                        className='w-full text-richblack-400 bg-richblack-700 rounded-md text-lg'
                     />
                     {errors.courseTitle && (
                         <span>Course Price is Required **</span>
@@ -106,9 +108,9 @@ const CourseInformation = () => {
                         id='courseCategory'
                         defaultValue={""}
                         {...register("courseCategory", {required:true})}
-                        className='w-full text-richblack-900'
+                        className='w-full text-richblack-400 bg-richblack-700 rounded-md text-lg'
                     >
-                        <option value="" disabled className=' text-richblack-500'>Choose a category</option>
+                        <option value="" disabled className=' text-richblack-400 bg-richblack-700 rounded-md text-lg'>Choose a category</option>
                         {
                             !loading && 
                             courseCategories.map((cat )=>(
@@ -124,6 +126,13 @@ const CourseInformation = () => {
 
 
                 {/* tags */}
+                <TagsInput
+                    name={"courseTags"}
+                    label={'Tags'}
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                />
 
                 <div>
                     <label htmlFor='courseBenefits'>Course Benifits<sup>*</sup></label>
@@ -131,7 +140,7 @@ const CourseInformation = () => {
                         id='courseBenefits'
                         placeholder='Enter Benifits'
                         {...register("courseBenefits", { required: true })}
-                        className='w-full min-h-[130px] text-richblack-900'
+                        className='w-full min-h-[130px] text-richblack-400 bg-richblack-700 rounded-md text-lg'
                     />
                     {errors.courseShortDesc && (
                         <span>Course Benifits are Required **</span>

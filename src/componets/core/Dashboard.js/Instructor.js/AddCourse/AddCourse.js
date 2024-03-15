@@ -5,7 +5,7 @@ const AddCourse = () => {
 
   return (
     <div
-        className=' border-2 border-white mx-auto w-[90%] my-10'
+        className=' border-2 border-white mx-auto w-[90%] my-10 flex  justify-evenly'
     >
       
       <div>
@@ -15,7 +15,7 @@ const AddCourse = () => {
         </div>
       </div>
 
-      <div>
+      <div className='w-[30%]'>
         <h3>Course Upload Tips</h3>
         <ul>
           <li>Set the course Price option or make it free</li>

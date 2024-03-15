@@ -37,7 +37,7 @@ const RequirementInput = ({ name, label, getValues, setValue, errors, register }
                 value={requirement}
                 onChange={(e) => { setRequirement(e.target.value) }}
                 placeholder='Enter your requirement/instruction'
-                className='w-full text-richblack-500'
+                className='w-full text-richblack-400 bg-richblack-700 rounded-md text-lg'
             />
             <button
                 className=' font-semibold text-yellow-200'
