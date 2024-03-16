@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
-import { getAllCourses } from '../../../../../services/operations/courseAPI';
+import { addCourse, getAllCourses } from '../../../../../services/operations/courseAPI';
 import RequirementInput from './RequirementInput';
 import {setStep} from '../../../../../redux/slices/courseSlice'
 import TagsInput from './TagsInput';
+import ThumbnailInput from './ThumbnailInput';
 
 const CourseInformation = () => {
 
@@ -54,6 +55,9 @@ const CourseInformation = () => {
     const onSubmit = async (data) => {
         // e.preventDefault();
         console.log("form data is" , data);
+
+        const response = dispatch(addCourse(data));
+
     }
 
     return (
@@ -114,7 +118,7 @@ const CourseInformation = () => {
                         {
                             !loading && 
                             courseCategories.map((cat )=>(
-                                <option value={cat.name} key={cat._is} >{cat.name}</option>
+                                <option value={cat.name} key={cat._id} >{cat.name}</option>
                             ))
                         }
 
@@ -129,6 +133,14 @@ const CourseInformation = () => {
                 <TagsInput
                     name={"courseTags"}
                     label={'Tags'}
+                    register={register}
+                    errors={errors}
+                    setValue={setValue}
+                />
+
+                <ThumbnailInput
+                    name={"courseImage"}
+                    label={'Course Thumbnail'}
                     register={register}
                     errors={errors}
                     setValue={setValue}

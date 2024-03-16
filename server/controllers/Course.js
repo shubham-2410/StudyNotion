@@ -6,10 +6,12 @@ const { uploadImageToClodinary } = require("../utils/imageUploader");
 
 const createCourse = async (req , res)=>{
     try {
+        console.log("inside couse"  )
         const {name , description , whatwillyoulearn , price , category , tag} = req.body;
-
+        console.log(name , description , whatwillyoulearn , price , category , tag);
         const thumbnail = req.files.thumbnail;
 
+        console.log("oye hoyr" ,thumbnail)
         if(!name || !description ||!whatwillyoulearn ||!price ||!category || !tag){
             return res.status(409).json({
                 success:false,
