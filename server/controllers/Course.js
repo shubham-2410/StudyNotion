@@ -6,12 +6,9 @@ const { uploadImageToClodinary } = require("../utils/imageUploader");
 
 const createCourse = async (req , res)=>{
     try {
-        console.log("inside couse"  )
         const {name , description , whatwillyoulearn , price , category , tag} = req.body;
-        console.log(name , description , whatwillyoulearn , price , category , tag);
         const thumbnail = req.files.thumbnail;
 
-        console.log("oye hoyr" ,thumbnail)
         if(!name || !description ||!whatwillyoulearn ||!price ||!category || !tag){
             return res.status(409).json({
                 success:false,
@@ -115,6 +112,36 @@ const showAllCourse= async (req, res)=>{
     }
 }
 
+const allCoursesByInstructor= async (req, res)=>{
+    try {
+        const userId = req.user.id;
+        const allCourses = await Course.find({instructor:userId},{
+            name:true,
+            price:true,
+            description:true,
+            image:true,
+            category:true,
+            instructor:true
+        }).populate("instructor")
+        .populate("category")
+        .exec();
+
+        return res.status(200).json({
+            success:true,
+            message:"All courses fetched successfully",
+            allCourses
+        });
+    } 
+    catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:"Failure to fetch all courses details",
+            error
+        })
+    }
+}
+
+
 const getCourseDetails = async (req , res)=>{
     try {
         console.log(" i am in")
@@ -165,4 +192,5 @@ module.exports={
     createCourse,
     showAllCourse,
     getCourseDetails,
+    allCoursesByInstructor,
 }

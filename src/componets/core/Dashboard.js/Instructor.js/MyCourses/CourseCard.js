@@ -1,14 +1,16 @@
 import React from 'react'
 
-const CourseCard = () => {
+const CourseCard = ({course}) => {
+
+  console.log("I am here" , course);
   return (
     <div className='flex items-center my-5'>
         <div className='flex w-[70%]'>
 
-            <img/>
+            <img src={course.image} alt='thumbnail' />
             <div>
-                <h4>title</h4>
-                <p>Description</p>
+                <h4>{course?.name}</h4>
+                <p>{course?.desciotion}</p>
                 <p>Date</p>
                 <p>Status</p>
             </div>
@@ -16,7 +18,7 @@ const CourseCard = () => {
         </div>
         <div className='flex gap-5'>
             <p>time</p>
-            <p>Price</p>
+            <p>{course?.price}</p>
             <p>edit</p>
         </div>
     </div>

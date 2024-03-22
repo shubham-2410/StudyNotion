@@ -1,6 +1,7 @@
 import { categories } from "../apis";
 import { apiConnector } from "../apiconnector";
 import { toast } from 'react-hot-toast';
+import { setEntireCourseData } from "../../redux/slices/viewCourseSlice";
 
 export function getAllCourses() {
 	return async () => {
@@ -19,7 +20,6 @@ export function getAllCourses() {
 			return response.data.allCategory;
 		}
 		catch (error) {
-			console.log("Login error ", error);
 			toast.error(error.response.data.message);
 			return [];
 		}
@@ -56,5 +56,37 @@ export function addCourse(data) {
 		}
 
 		toast.dismiss(toastId);
+	}
+}
+
+
+export function getAllCoursesDetailsByInstructor() {
+	const token = JSON.parse(localStorage.getItem('token'));
+	return async (dispatch) => {
+
+		const toastId = toast.loading('loading...')
+		try {
+			
+			const headers = {
+				authorization : `Bearer ${token}`
+			}
+			console.log("Inside get all courses details connector" , headers)
+			const response = await apiConnector("GET", categories.INSTRUCTOR_ALL_COURSES_DETAILS_API , null , headers );
+			await dispatch(setEntireCourseData(response.data.allCourses));
+
+			if (!response.data.success) {
+				throw new Error(response.data);
+			}
+
+			return response.data.allCourses;
+		}
+		catch (error) {
+			console.log("Error for  ", error);
+			toast.error(error.response.data.message);
+			return [];
+		}
+		finally{
+			toast.dismiss(toastId);
+		}
 	}
 }
